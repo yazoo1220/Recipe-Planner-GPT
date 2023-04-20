@@ -1,0 +1,5 @@
+langchain
+openai
+wolframalpha
+google-search-results
+streamlit
