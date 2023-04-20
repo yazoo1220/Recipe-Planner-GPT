@@ -9,12 +9,13 @@ llm = ChatOpenAI(temperature=0.5)
 tools = load_tools(["serpapi", "requests", "python_repl","wolfram-alpha"], llm=llm)
 agent = initialize_agent(tools, llm, agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION, verbose=True)
 st.title('Recipe Planner GPT')
-query = st.text_input("create menus for one week. Each day the total calory should be 2000. Don't repeat menus. generate the list of menus with the details of the menu's name and ingredients with their weight and calories calculates in Wolfram in json objects and store as menus.json file in the same folder.")
 
-agent.run(query)
+query = st.text_input(label="request", value="create menus for one week. Each day the total calory should be 2000. Don't repeat menus. generate the list of menus with the details of the menu's name and ingredients with their weight and calories calculates in Wolfram in json objects and store as menus.json file in the same folder.")
+button = st.button('ask')
 
-import pandas as pd
+if query and button:
+    agent.run(query)
 
-df = pd.read_json('menus.json')
-
-st.dataframe(df)
+    import pandas as pd
+    df = pd.read_json('menus.json')
+    st.dataframe(df)
