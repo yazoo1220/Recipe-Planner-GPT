@@ -15,7 +15,7 @@ query = st.text_input(label="request", value="create menus for one week. Each da
 button = st.button('ask')
 
 if query and button:
-    with spinner('generating menus'):
+    with st.spinner('generating menus'):
         prefix = 'return the same Jason strings as stdout'
         json = agent.run(prefix + query)
         st.write('thank you for waiting! Those use the list of menus I came up with')
