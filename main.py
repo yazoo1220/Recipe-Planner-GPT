@@ -15,9 +15,10 @@ query = st.text_input(label="request", value="create menus for one week. Each da
 button = st.button('ask')
 
 if query and button:
-    prefix = 'return the same Jason strings as stdout'
-    agent.run(prefix + query)
-
-    import pandas as pd
-    df = pd.read_json('menus.json')
-    st.dataframe(df)
+    with spinner('generating menus'):
+        prefix = 'return the same Jason strings as stdout'
+        json = agent.run(prefix + query)
+        st.write('thank you for waiting! Those use the list of menus I came up with')
+        import pandas as pd
+        df = pd.read_json(json)
+        st.dataframe(df)
