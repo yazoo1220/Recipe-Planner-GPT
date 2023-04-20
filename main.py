@@ -8,8 +8,8 @@ from langchain.chat_models import ChatOpenAI
 llm = ChatOpenAI(temperature=0.5)
 tools = load_tools(["serpapi", "requests", "python_repl","wolfram-alpha"], llm=llm)
 agent = initialize_agent(tools, llm, agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION, verbose=True)
-
-query = st.text_input('create menus for one week. Each day the total calory should be 2000. generate the list of menus with the details of it's ingredients with their weight and calories in json objects and store as menus.json file in the same folder. All the language should be Japanese')
+st.title('Recipe Planner GPT')
+query = st.text_input("create menus for one week. Each day the total calory should be 2000. Don't repeat menus. generate the list of menus with the details of the menu's name and ingredients with their weight and calories calculates in Wolfram in json objects and store as menus.json file in the same folder.")
 
 agent.run(query)
 
